@@ -59,3 +59,26 @@ CREATE TABLE murderStats1st (
 	);
   
   --- Split up information from the murder stats into two to practice joining
+  
+  ###
+ALTER TABLE murderstats
+ALTER COLUMN year TYPE text;
+##
+ALTER TABLE murderstats
+ALTER COLUMN year TYPE int USING year::integer;
+##
+ALTER TABLE murderstats
+ALTER COLUMN agencytype TYPE varchar (200);
+##
+ALTER TABLE murderstats
+ALTER COLUMN agencyname TYPE varchar (200);
+
+
+--- Commands ---
+#Selects all information from the table murderstats2nd
+SELECT * FROM murderstats2nd;
+
+#Selects only the columns state, year, crimetype and crimesolved from table murderstats2nd
+SELECT state, year, crimetype, crimesolved FROM murderstats2nd;
+
+#
