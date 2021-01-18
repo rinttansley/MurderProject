@@ -116,3 +116,18 @@ ORDER BY state DESC, crimesolved ASC;
 SELECT perpetratorsex, perpetratorrace, relationship
 FROM murderstats1st
 WHERE state = 'Wyoming';
+
+#Selects a few variables from a specific table and uses the LIKE operator to search for states that contain certain criteria 
+SELECT perpetratorsex, perpetratorrace, relationship, state
+FROM murderstats1st
+WHERE state LIKE 'M%'
+
+SELECT perpetratorsex, perpetratorrace, relationship, state
+FROM murderstats1st
+WHERE state LIKE '%nt%'
+
+SELECT perpetratorsex, perpetratorrace, relationship, state
+FROM murderstats1st
+WHERE state LIKE '_entucky'
+
+
