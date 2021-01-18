@@ -76,7 +76,7 @@ ALTER COLUMN agencyname TYPE varchar (200);
 
 ---Notes---
 
-Order of operations for PGAdmin
+~~ Order of operations for PGAdmin
 Punctuation - quoates, parenteses, math operators
 Numbers
 Punctuation - ? and additional
@@ -85,6 +85,20 @@ Punctuation - brackets, underscore
 Lowercase letters
 Punctuation - special characters, extended alphabet
 
+~~ Operators
+=
+<> !=
+>
+<
+>=
+<=
+BETWEEN
+IS
+LIKE - pattern (case sensitive)
+ILIKE - pattern (not case sensitive)
+NOT
+
+**Probably want to create some statements utilizing at least the last 4/5 to show knowledge and ability to use
 
 --- Commands ---
 #Selects all information from the table murderstats2nd
@@ -97,3 +111,8 @@ SELECT state, year, crimetype, crimesolved FROM murderstats2nd;
 SELECT state, crimetype, crimesolved
 FROM murderstats1st
 ORDER BY state DESC, crimesolved ASC;
+
+#Selects the perpetrator sex, perpetratorrace and relationshup from a specific table where a specific critera for state is met
+SELECT perpetratorsex, perpetratorrace, relationship
+FROM murderstats1st
+WHERE state = 'Wyoming';
