@@ -130,4 +130,24 @@ SELECT perpetratorsex, perpetratorrace, relationship, state
 FROM murderstats1st
 WHERE state LIKE '_entucky'
 
+#Selects all variable names from a specific table that should meet the criteria of having Kentucky as the state and Blunt Object as the weapon - if there were any additional
+#variations on the names it would be a good idea to use wildcards here
+SELECT *
+FROM murderstats1st
+WHERE state = 'Kentucky'
+	AND weapon = 'Blunt Object';
 
+
+#Selects all variable names from a specific table that should meet the criteria of having Kentucky or Montana as the listed state
+SELECT *
+FROM murderstats1st
+WHERE state = 'Kentucky'
+	OR state = 'Montana'
+	
+#Selects all variable names from a specific table that should meet the criteria of having Kentycky as the state and a victim whose age is under(and not including)
+#15 or over(and not including) 90 but sorts the age in descending order
+SELECT *
+FROM murderstats1st
+WHERE state = 'Kentucky'
+	AND (victimage < 15 OR victimage > 90)
+ORDER BY victimage DESC;
