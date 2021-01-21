@@ -170,6 +170,21 @@ VALUES
 COPY char_data_types TO 'C:\Users\Public\typetest.txt'
 WITH (FORMAT CSV, HEADER, DELIMITER '|');
 
+#Demonsrates the importance of choosing the correct type for spacing/processing/efficiency and accuracy with numerical data
+CREATE TABLE number_data_types (
+	numeric_column numeric(20,5),
+	real_column real,
+	double_column double precision);
+	
+INSERT INTO number_data_types
+VALUES
+	(.7, .7, .7),
+	(2.13579, 2.13579, 2.13579),
+	(2.1367987654, 2.1367987654, 2.1367987654);
+	
+SELECT * FROM number_data_types;
+
+
 #Demonstrates the different ways dates can be displayed
 CREATE TABLE date_time_types (
 	timestamp_column timestamp with time zone,
@@ -192,3 +207,5 @@ SELECT
 	interval_column,
 	timestamp_column - interval_column AS new_date
 FROM date_time_types;
+
+
