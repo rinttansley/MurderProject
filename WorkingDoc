@@ -151,3 +151,44 @@ FROM murderstats1st
 WHERE state = 'Kentucky'
 	AND (victimage < 15 OR victimage > 90)
 ORDER BY victimage DESC;
+
+
+#Demonstrates the importance of choosing the correct type for spacing/processing/efficiency
+CREATE TABLE char_data_types(
+	varchar_column varchar(10),
+	char_column char(10),
+	text_column text);
+	
+	
+	
+INSERT INTO char_data_types
+VALUES
+	('abc', 'abc', 'abc'),
+	('defghi', 'defghi', 'defghi');
+	
+	
+COPY char_data_types TO 'C:\Users\Public\typetest.txt'
+WITH (FORMAT CSV, HEADER, DELIMITER '|');
+
+#Demonstrates the different ways dates can be displayed
+CREATE TABLE date_time_types (
+	timestamp_column timestamp with time zone,
+	interval_column interval);
+
+
+INSERT INTO date_time_types
+VALUES
+	('2018-12-31 01:00 EST', '2 days'),
+	('2018-12-31 01:00 -8', '1 month'),
+	('2018-12-31 01:00 Australia/Melbourne', '1 century'),
+	(now(), '1 week');
+	
+SELECT * FROM date_time_types;
+
+
+#Demonstrates how to utilize already created date columns to create a new date column
+SELECT 
+	timestamp_column,
+	interval_column,
+	timestamp_column - interval_column AS new_date
+FROM date_time_types;
