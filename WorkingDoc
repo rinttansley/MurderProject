@@ -100,6 +100,9 @@ NOT
 
 **Probably want to create some statements utilizing at least the last 4/5 to show knowledge and ability to use
 
+~~ Good practice to avoid calling files .csv if the coma is not the separator/delimiter
+
+
 --- Commands ---
 #Selects all information from the table murderstats2nd
 SELECT * FROM murderstats2nd;
@@ -240,3 +243,20 @@ WITH (FORMAT CSV,HEADER);
 COPY supervisor_salaries (town, supervisor, salary)
 FROM 'C:\Users\Public\supervisor_salaries.csv'
 WITH (FORMAT CSV, HEADER);
+
+
+#Allows you to fill in missing data when importing by using a temporary table
+CREATE TEMPORARY TABLE supervisor_salaries_temp (LIKE supervisor_salaries);
+
+COPY supervisor_salaries_temp (town, supervisor, salary)
+FROM 'C:\Users\Public\supervisor_salaries.csv'
+WITH (FORMAT CSV, HEADER);
+
+INSERT INTO supervisor_salaries (town, county, supervisor, salary)
+SELECT town, 'Some County', supervisor, salary
+FROM supervisor_salaries_temp;
+
+
+DROP TABLE supervisor_salaries_temp;
+
+SELECT * FROM supervisor_salaries;
