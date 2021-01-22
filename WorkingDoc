@@ -100,6 +100,17 @@ NOT
 
 **Probably want to create some statements utilizing at least the last 4/5 to show knowledge and ability to use
 
+~~ Math Operators
++
+-
+*
+/
+% - Modulo (returns just the remainder)
+^
+|/ - Square Root
+||/ - Cube Root
+| - Factorial
+
 ~~ Good practice to avoid calling files .csv if the coma is not the separator/delimiter
 
 
