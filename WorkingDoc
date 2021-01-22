@@ -222,3 +222,17 @@ FROM number_data_types;
 
 SELECT CAST(char_column AS integer) FROM char_data_types;
 
+
+#Creates a table and then demonstrates how to load in a .csv file
+CREATE TABLE testingcopy(
+	variable_name varchar(75),
+	first_number int,
+	second_number int);
+
+
+
+COPY testingcopy
+FROM 'C:\Users\Public\codebookconc2test.csv'
+WITH (FORMAT CSV, HEADER);
+
+#
