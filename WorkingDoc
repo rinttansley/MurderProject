@@ -230,9 +230,13 @@ CREATE TABLE testingcopy(
 	second_number int);
 
 
+#Demonstrates how to import a .csv file into an already made database table - it must be created with the correct data types for the import to work
+COPY us_counties_2010
+FROM 'C:\Users\Public\us_counties_2010.csv'
+WITH (FORMAT CSV,HEADER);
 
-COPY testingcopy
-FROM 'C:\Users\Public\codebookconc2test.csv'
+
+#Allows you to copy in information from a file if you only have certain attriubtes or columns
+COPY supervisor_salaries (town, supervisor, salary)
+FROM 'C:\Users\Public\supervisor_salaries.csv'
 WITH (FORMAT CSV, HEADER);
-
-#
