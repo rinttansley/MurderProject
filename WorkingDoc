@@ -288,3 +288,24 @@ COPY (
 
 TO 'C:\Users\Public\millcou.txt'
 WITH (FORMAT CSV, HEADER, DELIMITER '|');
+
+#Demonstrates selecting table columns and renaming them AS something easier to work with
+SELECT geo_name,
+	state_us_abbreviation AS "st",
+	p0010001 AS "Total Population",
+	p0010003 AS "White Alone",
+	p0010004 AS "Black or African American Alone",
+	p0010005 AS "Am Indian/Alaska Native Alone",
+	p0010006 AS "Asian Alone",
+	p0010007 AS "Native Hawaiian Alone",
+	p0010008 AS "Some Other Alone",
+	p0010009 AS "Two or More"
+FROM us_Counties_2010;
+
+#Demonstrates selecting the table columns as aliases and adds a new column with the first two added together
+SELECT geo_name,
+		state_us_abbreviation AS "st",
+		p0010003 AS "White Alone",
+		p0010004 AS "Black Alone",
+		p0010003 + p0010004 AS "Total White and Black"
+FROM us_Counties_2010;
