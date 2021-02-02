@@ -439,6 +439,11 @@ FROM murderstats1st m1 JOIN murderstats2nd m2
 ON m1.agencycode = m2.agencycode
 LIMIT 5;
 
+~~~
+Works for:
+	If you want your results to contain all of the rows from 1 of the tables
+	If you want to look for missing values in one of the tables
+	When you know some rows won't have matching values
 #Demonstrates LEFT JOIN and RIGHT JOIN
 SELECT *
 FROM murderstats1st m1 LEFT JOIN murderstats2nd m2
@@ -447,5 +452,5 @@ LIMIT 5;
 
 SELECT *
 FROM murderstats1st m1 RIGHT JOIN murderstats2nd m2
-ON m1.agencycode = m2.agencycode
-LIMIT 5;
+ON m1.perpetratorage = m2.perpetratorage
+LIMIT 30;
