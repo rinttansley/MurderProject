@@ -458,3 +458,18 @@ LIMIT 30;
 --FULL OUTER JOIN gives results from every row in the left table including matching rows and blanks in the right tablefollowed by any left over missing rows from the right table
 ~~Useful for merging 2 data sources that partially overlap
 ~~ or to viszualize the degree to which the tables share matching data
+
+#Demonstrates joining tables to find NULL values
+SELECT * 
+FROM schools_left sl LEFT JOIN schools_right sr
+ON sl.id = sr.id
+WHERE sr.id IS NULL;
+
+
+#Demonstrates selecting certain columns from certain tables, utilizing a join and limiting the results
+SELECT m1.victimage,
+	   m2.victimage,
+	   m2.state
+FROM murderstats1st m1 LEFT JOIN murderstats2nd m2
+ON m1.agencycode = m2.agencycode
+LIMIT 25;
