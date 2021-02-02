@@ -328,3 +328,23 @@ SELECT geo_name,
 	(CAST (p0010006 AS numeric(8,1)) / p0010001) * 100 AS "pct_asian"
 FROM us_counties_2010
 ORDER BY "pct_asian" DESC;
+
+#Demonstrates calculating a percentage
+SELECT department, spend_2014, spend_2017,
+		round( (spend_2017 - spend_2014) / spend_2014 * 100, 1) AS "pct change"
+FROM percent_change;
+
+
+
+#Demonstrates continuous and discrete percentile statements
+CREATE TABLE percentile_test (
+	numbers integer);
+
+INSERT INTO percentile_test (numbers) VALUES (1), (2), (3), (4), (5), (6);
+
+SELECT
+	percentile_cont(.5)
+	WITHIN GROUP (ORDER BY numbers),
+	percentile_disc(.5)
+	WITHIN GROUP (ORDER BY numbers)
+FROM percentile_test;
