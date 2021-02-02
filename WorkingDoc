@@ -454,3 +454,7 @@ SELECT *
 FROM murderstats1st m1 RIGHT JOIN murderstats2nd m2
 ON m1.perpetratorage = m2.perpetratorage
 LIMIT 30;
+
+--FULL OUTER JOIN gives results from every row in the left table including matching rows and blanks in the right tablefollowed by any left over missing rows from the right table
+~~Useful for merging 2 data sources that partially overlap
+~~ or to viszualize the degree to which the tables share matching data
