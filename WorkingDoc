@@ -411,7 +411,7 @@ FOREIGN Key − Constrains data based on columns in other tables
 CHECK Constraint − The CHECK constraint ensures that all values in a column satisfy certain conditions
 EXCLUSION Constraint − The EXCLUDE constraint ensures that if any two rows are compared on the specified column(s) or expression(s) using the specified operator(s), not all of these comparisons will return TRUE
 ~~
-#
+#Demonstrates the need and use of constraining information that goes into databases to avoid duplicate entries
 CREATE TABLE departments (
 	dept_id bigserial,
 	dept varchar(100),
@@ -429,3 +429,23 @@ CREATE TABLE employees(
 	CONSTRAINT emp_key PRIMARY KEY (emp_id),
 	CONSTRAINT emp_dept_unique UNIQUE (emp_id, dept_id)
 );
+
+
+
+#Demonstrates joining two tables together and limiting them to 5 because a general join brings back ALL information from both tables
+	
+SELECT * 
+FROM murderstats1st m1 JOIN murderstats2nd m2
+ON m1.agencycode = m2.agencycode
+LIMIT 5;
+
+#Demonstrates LEFT JOIN and RIGHT JOIN
+SELECT *
+FROM murderstats1st m1 LEFT JOIN murderstats2nd m2
+ON m1.agencycode = m2.agencycode
+LIMIT 5;
+
+SELECT *
+FROM murderstats1st m1 RIGHT JOIN murderstats2nd m2
+ON m1.agencycode = m2.agencycode
+LIMIT 5;
