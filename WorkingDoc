@@ -124,6 +124,9 @@ CHECK
 UNIQUE
 NOT NULL
 --- // ---
+Table constraints 
+Column constraints
+--- // ---
 
 
 --- Commands ---
