@@ -113,6 +113,13 @@ NOT
 
 ~~ Good practice to avoid calling files .csv if the coma is not the separator/delimiter
 
+--- // ---
+Use snake_case
+Use easy to understand and not abbreviated names
+For table names, use plurals
+Mind the length (SQL standard is 128 char, Postgres is 63, Orgacle is 30)
+When making copies, use names that will help you manage them later (parsing), name_name_2021_10_20 - will also help files be sorted on date
+
 
 --- Commands ---
 #Selects all information from the table murderstats2nd
