@@ -467,9 +467,16 @@ WHERE sr.id IS NULL;
 
 
 #Demonstrates selecting certain columns from certain tables, utilizing a join and limiting the results
-SELECT m1.victimage,
-	   m2.victimage,
-	   m2.state
+SELECT m1.victimage, m2.victimage, m2.state
 FROM murderstats1st m1 LEFT JOIN murderstats2nd m2
 ON m1.agencycode = m2.agencycode
 LIMIT 25;
+
+#Demonstrates selecting certain columns from multiple tables, utilizing a join and limiting the results
+SELECT lt.state, lt.year, mt.state, rt.state
+FROM murder1980 AS lt LEFT JOIN murderstats1st as mt
+ON lt.state = mt.state
+LEFT JOIN murderstats2nd as rt
+ON lt.state = rt.state
+LIMIT 5;
+
