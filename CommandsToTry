@@ -10,3 +10,45 @@ https://www.reddit.com/r/sqltutorial/comments/qmlj52/mysql_tutorial_for_data_ana
 I want to be able to get the average of 1980 and 1981 and perform percentages and changes on them
 Create unique column with 2 different keys constraints
 
+
+https://www.bitdegree.org/learn/sql-commands-list
+
+1. SQL Commands List
+AND|OR
+ALTER TABLE
+AS (alias)
+BETWEEN
+CREATE DATABASE
+CREATE TABLE
+CREATE INDEX
+CREATE VIEW
+DELETE
+GRANT
+REVOKE
+COMMIT
+ROLLBACK
+SAVEPOINT
+DROP DATABASE
+DROP INDEX
+DROP TABLE
+EXISTS
+GROUP BY
+HAVING
+IN
+INSERT INTO
+INNER JOIN
+LEFT JOIN
+RIGHT JOIN
+FULL JOIN
+LIKE
+ORDER BY
+SELECT
+SELECT *
+SELECT DISTINCT
+SELECT INTO
+SELECT TOP
+TRUNCATE TABLE
+UNION
+UNION ALL
+UPDATE
+WHERE
