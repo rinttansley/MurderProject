@@ -4,7 +4,11 @@ Tryingto start a more focused repo for commands as of 11.8.2021
 
 
 
+#Select
 
+SELECT recordid, year, victimsex, weapon
+FROM murderstats1st
+LIMIT 5;
 
 
 
