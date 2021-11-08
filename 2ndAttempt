@@ -1,5 +1,14 @@
 Tryingto start a more focused repo for commands as of 11.8.2021
 
+# Clause Ordering
+1.SELECT
+2.FROM
+3.WHERE
+4.GROUP BY
+5.HAVING
+6.ORDER BY
+
+
 
 
 
