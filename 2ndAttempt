@@ -6,9 +6,25 @@ Tryingto start a more focused repo for commands as of 11.8.2021
 
 #Select
 
+#SELECTmulCol
 SELECT recordid, year, victimsex, weapon
 FROM murderstats1st
 LIMIT 5;
+
+
+#SELECTdistinctRows
+SELECT DISTINCT weapon
+FROM murderstats1st;
+
+#SELECTlimitedrowsstartingrow
+SELECT recordid, year, victimsex, weapon
+FROM murderstats1st
+LIMIT 10 OFFSET 15;
+
+# First Comment
+ -- second comment
+ /* third comment */
+ 
 
 
 
