@@ -2,7 +2,7 @@
 
 
 ## Project Summary
-This project was created using a self-collected dataset via a Google Docs form. The main objective of my analysis was to answer the question: "Can you predict if office workers will want to return to the office after the COVID pandemic has subsided based on external factors?". The modeling I chose for this project was logistic regression in R utilizing R Studio.
+This is a personal project I worked on to showcase my ability to use SQL. I chose a data set with information that I find interesting, utilized as many available commands to answer analytical questions and visualized the results in Tableau. 
 
 ## Data Cleaning Methods
 This project required several things be changed in order to begin using the machine learning model:
