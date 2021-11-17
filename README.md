@@ -22,5 +22,5 @@ Methods to be added in both SQL form and Tableau visualizations.
 ## References
 SQL Recipies - App
 
-Practical SQL: A Beginner’s Guide to Storytelling with Data by Anthony DeBarros
+Practical SQL - A Beginner’s Guide to Storytelling with Data by Anthony DeBarros
 
