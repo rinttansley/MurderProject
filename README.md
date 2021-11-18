@@ -20,6 +20,8 @@ Methods to be added in both SQL form and Tableau visualizations.
 
 
 ## References
+This data set was obtained from data.world - https://data.world/frank12/homicide-dataset-cleaned
+
 SQL Recipies - App
 
 Practical SQL - A Beginner’s Guide to Storytelling with Data by Anthony DeBarros
