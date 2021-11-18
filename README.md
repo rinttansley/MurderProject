@@ -1,5 +1,6 @@
 # MurderProject - This project is still currently in progress
-## It is also important to note that creating a GitHub is also its own work in progress
+### General Important notes: creating a GitHub is also its own work in progress
+### While I do view myself as somewhat proficient in terms of navigating SQL, I fully believe there is still a wealth of opportunity for me to explore within SQL, particularly with Subqueries and answering interview style questions which will be an additional branch to this project repository. 
 
 
 ## Project Summary
