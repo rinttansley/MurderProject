@@ -77,5 +77,97 @@ ALTER COLUMN agencytype TYPE varchar (200);
 ALTER TABLE murderstats
 ALTER COLUMN agencyname TYPE varchar (200);
 
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Practicing commands
+
+#Selects all information from the table murderstats2nd
+SELECT * FROM murderstats2nd;
+
+#Selects only the columns state, year, crimetype and crimesolved from table murderstats2nd
+SELECT state, year, crimetype, crimesolved FROM murderstats2nd;
+
+#Selects the state, crime type and crimesolved columns from a specific table and orders state by descending order and vrimesolved by ascending order
+SELECT state, crimetype, crimesolved
+FROM murderstats1st
+ORDER BY state DESC, crimesolved ASC;
+
+#Selects the perpetrator sex, perpetratorrace and relationshup from a specific table where a specific critera for state is met
+SELECT perpetratorsex, perpetratorrace, relationship
+FROM murderstats1st
+WHERE state = 'Wyoming';
+
+#Selects a few variables from a specific table and uses the LIKE operator to search for states that contain certain criteria 
+SELECT perpetratorsex, perpetratorrace, relationship, state
+FROM murderstats1st
+WHERE state LIKE 'M%'
+
+SELECT perpetratorsex, perpetratorrace, relationship, state
+FROM murderstats1st
+WHERE state LIKE '%nt%'
+
+SELECT perpetratorsex, perpetratorrace, relationship, state
+FROM murderstats1st
+WHERE state LIKE '_entucky'
+
+#Selects all variable names from a specific table that should meet the criteria of having Kentucky as the state and Blunt Object as the weapon - if there were any additional
+#variations on the names it would be a good idea to use wildcards here
+SELECT *
+FROM murderstats1st
+WHERE state = 'Kentucky'
+	AND weapon = 'Blunt Object';
+
+
+#Selects all variable names from a specific table that should meet the criteria of having Kentucky or Montana as the listed state
+SELECT *
+FROM murderstats1st
+WHERE state = 'Kentucky'
+	OR state = 'Montana'
+	
+#Selects all variable names from a specific table that should meet the criteria of having Kentycky as the state and a victim whose age is under(and not including)
+#15 or over(and not including) 90 but sorts the age in descending order
+SELECT *
+FROM murderstats1st
+WHERE state = 'Kentucky'
+	AND (victimage < 15 OR victimage > 90)
+ORDER BY victimage DESC;
+
+#Demonstrates joining two tables together and limiting them to 5 because a general join brings back ALL information from both tables
+	
+SELECT * 
+FROM murderstats1st m1 JOIN murderstats2nd m2
+ON m1.agencycode = m2.agencycode
+LIMIT 5;
+
+Works for:
+	If you want your results to contain all of the rows from 1 of the tables
+	If you want to look for missing values in one of the tables
+	When you know some rows won't have matching values
+	
+# Demonstrates LEFT JOIN and RIGHT JOIN
+SELECT *
+FROM murderstats1st m1 LEFT JOIN murderstats2nd m2
+ON m1.agencycode = m2.agencycode
+LIMIT 5;
+
+SELECT *
+FROM murderstats1st m1 RIGHT JOIN murderstats2nd m2
+ON m1.perpetratorage = m2.perpetratorage
+LIMIT 30;
+
+--FULL OUTER JOIN gives results from every row in the left table including matching rows and blanks in the right tablefollowed by any left over missing rows from the right table
+~~Useful for merging 2 data sources that partially overlap or to viszualize the degree to which the tables share matching data
+
+# Demonstrates selecting certain columns from certain tables, utilizing a join and limiting the results
+SELECT m1.victimage, m2.victimage, m2.state
+FROM murderstats1st m1 LEFT JOIN murderstats2nd m2
+ON m1.agencycode = m2.agencycode
+LIMIT 25;
+
+# Demonstrates selecting certain columns from multiple tables, utilizing a join and limiting the results
+SELECT lt.state, lt.year, mt.state, rt.state
+FROM murder1980 AS lt LEFT JOIN murderstats1st as mt
+ON lt.state = mt.state
+LEFT JOIN murderstats2nd as rt
+ON lt.state = rt.state
+LIMIT 5;
