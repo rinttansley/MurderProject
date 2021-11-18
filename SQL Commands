@@ -171,3 +171,414 @@ ON lt.state = mt.state
 LEFT JOIN murderstats2nd as rt
 ON lt.state = rt.state
 LIMIT 5;
+
+# Select Multiple Columns
+SELECT recordid, year, victimsex, weapon
+FROM murderstats1st
+LIMIT 5;
+
+
+# SELECTdistinctRows
+SELECT DISTINCT weapon
+FROM murderstats1st;
+
+# SELECTlimitedrowsstartingrow
+SELECT recordid, year, victimsex, weapon
+FROM murderstats1st
+LIMIT 10 OFFSET 15;
+
+#Sorts by the specified column name
+SELECT DISTINCT relationship
+FROM murderstats1st
+ORDER BY relationship;
+
+#Sorts on multiple columns
+SELECT DISTINCT crimetype, relationship
+FROM murderstats1st
+ORDER BY crimetype, relationship;
+
+
+#Sorts by column position
+SELECT DISTINCT crimetype, relationship, weapon
+FROM murderstats1st
+ORDER BY 2, 3;
+
+#Sorts by column position and chooses by age in descending order
+SELECT DISTINCT crimetype, relationship, weapon, victimage
+FROM murderstats1st
+ORDER BY 4 DESC;
+
+#Improves on the last query by limiting results that are under a certain age threshold
+
+SELECT DISTINCT crimetype, relationship, weapon, victimage
+FROM murderstats1st
+WHERE victimage < 100
+ORDER BY 4 DESC;
+
+#selects based on specified victim age and relationship/Checking for matches
+
+SELECT DISTINCT crimetype, relationship, weapon, victimage
+FROM murderstats1st
+WHERE victimage = 1 AND relationship = 'Brother'
+ORDER BY 4 DESC;
+
+#Does the same thing as above but with non-matches/exclusion critera
+SELECT DISTINCT crimetype, relationship, weapon, victimage
+FROM murderstats1st
+WHERE victimage = 1 AND relationship <> 'Brother'
+ORDER BY 2;
+
+
+#Utilizes the between clause
+SELECT DISTINCT weapon, victimage, perpetratorage
+FROM murderstats1st
+WHERE perpetratorage BETWEEN 10 AND 15
+ORDER BY weapon;
+
+
+#Is Null example
+#This doesn't actually return any results because my "nulls" are "unknowns" which means that there is still something in the field
+SELECT DISTINCT crimetype, relationship, weapon, victimage
+FROM murderstats1st
+WHERE relationship IS NULL
+ORDER BY 4 DESC;
+
+#The reverse, IS NOT NULL will return results as if that clause didn't exist since my database does not have null in that column
+SELECT DISTINCT crimetype, relationship, weapon, victimage
+FROM murderstats1st
+WHERE relationship IS NOT NULL
+ORDER BY 4 DESC;
+
+#Utilizes the OR operator
+SELECT DISTINCT year relationship, weapon, victimage
+FROM murderstats1st
+WHERE year < 1982 OR year = 1989
+ORDER BY year DESC;
+
+#Demonstrates using both OR and AND in the same select 
+SELECT DISTINCT year, relationship, weapon, victimage
+FROM murderstats1st
+WHERE (year < 1982 OR year = 1989) AND weapon = 'Shotgun' and relationship <> 'Wife'
+ORDER BY year DESC;
+
+
+#Demonstrates utilizing a comma separated list with IN which usually processes faster
+SELECT DISTINCT year, relationship, weapon, victimage
+FROM murderstats1st
+WHERE (year = 1989) AND weapon IN ('Shotgun', 'Knife');
+
+
+#Demonstrates using the not in command
+SELECT DISTINCT state
+FROM murderstats1st
+WHERE NOT state IN ('Colorado', 'New Mexico', 'Utah', 'Arizona')
+ORDER BY state;
+
+#Demonstrates using the % wildcard operator - it can be used at the beginning, end or both to find results that match what you've asked for
+SELECT DISTINCT state, month
+FROM murderstats1st
+WHERE month LIKE '%Ma%'
+ORDER BY month;
+
+#Demonstrates using the _ wildcard operator - this isn't as useful sometimes because you have to have an idea on what is there, it requires an exact match after the _
+SELECT state, month
+FROM murderstats1st
+WHERE month LIKE 'J_ne';
+
+#[] and [^] wildcards are only for Access and MS SQL
+
+#Demonstrates how to combine the results from 2 different columns into a new column
+SELECT DISTINCT weapon, crimesolved, weapon || ' - ' || crimesolved as weaponSolved
+FROM murderstats1st
+ORDER BY weaponSolved;
+
+#Demonstrates removing unwanted spaces from both the right side of the designated value, the left side of the value and then both sides of the value
+
+SELECT DISTINCT
+		RTRIM(weapon),
+		LTRIM(weapon),
+		TRIM(weapon)
+FROM murderstats1st
+ORDER BY btrim;
+
+
+#Demonstrates using an alias - new name for a calculated/created column
+SELECT DISTINCT
+		RTRIM(weapon),
+		LTRIM(weapon),
+		TRIM(weapon) as myTrimmedData
+FROM murderstats1st
+ORDER BY myTrimmedData;
+
+
+#Demonstrates using using mathematical calculations and aliases
+##If you can type cast the data from numeric into float/precision you could probably get the percentage
+SELECT DISTINCT victimage, perpetratorage, perpetratorage - victimage AS ageDifference
+FROM murderstats1st
+WHERE victimage < 6 AND victimage > 3 AND perpetratorage != 0
+ORDER BY ageDifference;
+
+
+
+#Demonstrates using an alias and then designating a new column name/state based on CASE WHEN
+SELECT DISTINCT victimage, perpetratorage,
+						CASE WHEN victimage < 18 THEN 'Minor' ELSE 'Adult' END victimAgeClassification
+FROM murderstats1st;
+
+
+
+#Demonstrates using the function to capitalize all of the letters in the field
+SELECT DISTINCT weapon,
+				UPPER(weapon)AS capWeapon
+FROM murderstats1st
+ORDER BY weapon;
+
+#Demonstrates using the function to make all letters of the selected field lowercase
+SELECT DISTINCT weapon,
+				LOWER(weapon)AS lowWeapon
+FROM murderstats1st
+ORDER BY weapon;
+
+
+#Demonstrates how to return a specific number of characters to the left of the indicated number in the selected field
+SELECT DISTINCT relationship,
+				LEFT(relationship,1) AS relationshipLEFT1,
+				LEFT(relationship,6) AS relationshipLEFT6
+FROM murderstats1st
+ORDER BY relationship;
+
+
+#Demonstrates how to return a specific number of characters to the right of the indicated number in the selected field
+SELECT DISTINCT relationship,
+				RIGHT(relationship,1) AS relationshipRIGHT1,
+				RIGHT(relationship,6) AS relationshipRIGHT
+FROM murderstats1st
+ORDER BY relationship;
+
+
+
+#Demonstrates how to return the number of characters each row in the selected field contains
+SELECT DISTINCT relationship,
+				LENGTH(relationship) AS relationshipLENGTH
+FROM murderstats1st
+ORDER BY relationship;
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~Dates Table~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CREATE TABLE nyc_yellow_taxi_trips_2016_06_01 (
+    trip_id bigserial PRIMARY KEY,
+    vendor_id varchar(1) NOT NULL,
+    tpep_pickup_datetime timestamp with time zone NOT NULL,
+    tpep_dropoff_datetime timestamp with time zone NOT NULL,
+    passenger_count integer NOT NULL,
+    trip_distance numeric(8,2) NOT NULL,
+    pickup_longitude numeric(18,15) NOT NULL,
+    pickup_latitude numeric(18,15) NOT NULL,
+    rate_code_id varchar(2) NOT NULL,
+    store_and_fwd_flag varchar(1) NOT NULL,
+    dropoff_longitude numeric(18,15) NOT NULL,
+    dropoff_latitude numeric(18,15) NOT NULL,
+    payment_type varchar(1) NOT NULL,
+    fare_amount numeric(9,2) NOT NULL,
+    extra numeric(9,2) NOT NULL,
+    mta_tax numeric(5,2) NOT NULL,
+    tip_amount numeric(9,2) NOT NULL,
+    tolls_amount numeric(9,2) NOT NULL,
+    improvement_surcharge numeric(9,2) NOT NULL,
+    total_amount numeric(9,2) NOT NULL
+);
+
+
+
+COPY nyc_yellow_taxi_trips_2016_06_01 (
+    vendor_id,
+		,
+    tpep_dropoff_datetime,
+    passenger_count,
+    trip_distance,
+    pickup_longitude,
+    pickup_latitude,
+    rate_code_id,
+    store_and_fwd_flag,
+    dropoff_longitude,
+    dropoff_latitude,
+    payment_type,
+    fare_amount,
+    extra,
+    mta_tax,
+    tip_amount,
+    tolls_amount,
+    improvement_surcharge,
+    total_amount
+   )
+FROM 'C:\Users\Public\Documents\datesexamples.csv'
+WITH (FORMAT CSV, HEADER, DELIMITER ',');
+
+
+
+SELECT * FROM nyc_yellow_taxi_trips_2016_06_01
+LIMIT 5;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#Demonstrates how to select certain parts out of a date field and store as aliases (worked with a column that had a timestamp
+SELECT tpep_pickup_datetime,
+		date_part('year', tpep_pickup_datetime) AS year,
+		date_part('month', tpep_pickup_datetime) AS month,
+		date_part('day', tpep_pickup_datetime) AS day,
+		to_char(tpep_pickup_datetime, 'DD.MM.YYYY') AS ruFormat
+FROM nyc_yellow_taxi_trips_2016_06_01;
+
+
+#Demonstrates using the SQRT function
+SELECT perpetratorage,
+		SQRT(perpetratorage)
+FROM murderstats1st;
+
+#Demonstrates using the COS function (cosin mathematical)
+SELECT perpetratorage,
+		COS(perpetratorage)
+FROM murderstats1st;
+
+#Demonstrates using the exponent function (exponential value of a specific number)
+SELECT perpetratorage,
+		EXP(perpetratorage)
+FROM murderstats1st;
+
+#Demonstrates how to return the trig sine of a specified angle
+SELECT perpetratorage,
+		SIN(perpetratorage)
+FROM murderstats1st;
+
+#Demonstrates how to return the trig tangent of a specified angle
+SELECT perpetratorage,
+		TAN(perpetratorage)
+FROM murderstats1st;
+
+#Might need a different number column to do ABC()/abs :: PI() ::
+
+#Demonstrates how to return an average of a field
+SELECT state, month,
+				AVG(incident) AS avgNumberIncidents
+FROM murderstats1st
+GROUP BY state, month
+ORDER BY avgNumberIncidents DESC;
+
+#Demonstrates how to return the number of items based on the selected criteria
+SELECT state, month,
+				COUNT(incident) AS countOfNumberIncidents
+FROM murderstats1st
+GROUP BY state, month
+ORDER BY countOfNumberIncidents DESC;
+
+#Demonstrates returning the minimum and maximum number of incidents as aliases
+SELECT state, month,
+				MIN(incident) AS minNumberIncidents,
+				MAX(incident) AS maxNumberIncidents
+FROM murderstats1st
+GROUP BY state, month
+ORDER BY month;
+
+
+#Demonstrates returning the total number of incidents via sum
+SELECT state,
+				SUM(incident) AS totalNumberIncidents
+FROM murderstats1st
+GROUP BY state
+ORDER BY state;
+
+#Demonstrates using an aggregate on distinct values
+SELECT 
+	COUNT(city) AS countOfCities,
+	COUNT (DISTINCT state) AS countDistinctStates
+FROM murderstats1st;
+
+#Demonstrates how to use all of the above aggregate functions in one call
+SELECT 
+	COUNT(city) AS countOfCities,
+	MIN(victimcount) AS minVictimCount,
+	MAX(victimcount) AS maxVictimCount,
+	AVG(victimcount) AS avgVictimCount,
+	SUM(victimcount) AS totalVictimCount
+FROM murderstats1st;
+
+
+#Demonstrates grouping by 1 column
+SELECT city,
+	COUNT(city) AS countOfCities,
+	MIN(victimcount) AS minVictimCount,
+	MAX(victimcount) AS maxVictimCount,
+	AVG(victimcount) AS avgVictimCount
+FROM murderstats1st;
+
+#Demonstrates grouping by multiple columns to allow granularity
+SELECT state, city,
+	COUNT(incident) AS countOfIncidents,
+	MIN(victimcount) AS minVictimCount,
+	MAX(victimcount) AS maxVictimCount,
+	AVG(victimcount) AS avgVictimCount
+FROM murderstats1st
+GROUP BY state, city;
+
+#Demonstrates grouping by column number which is not best practice and not supported by all DBMS
+SELECT state, city,
+	COUNT(incident) AS countOfIncidents,
+	MIN(victimcount) AS minVictimCount,
+	MAX(victimcount) AS maxVictimCount,
+	AVG(victimcount) AS avgVictimCount
+FROM murderstats1st
+GROUP BY 1, 2;
+
+#Demonstrates filgering out by the groups instead of the WHERE filter which filters on rows
+SELECT city, year,
+	COUNT(incident) AS countOfIncidents,
+	MIN(victimcount) AS minVictimCount,
+	MAX(victimcount) AS maxVictimCount,
+	AVG(victimcount) AS avgVictimCount
+FROM murderstats1st
+GROUP BY city, year
+HAVING COUNT(incident) > 50;
+
+
+
+#Demonstrates using HAVING and WHERE in the same statement
+SELECT
+	year,
+	COUNT(incident) AS countOfIncidents
+FROM murderstats1st
+WHERE victimage < 18
+GROUP BY year
+HAVING COUNT(incident) > 2500;
+
+#Demonstrates using HAVING, WHERE and ORDER BY
+SELECT
+	year,
+	COUNT(incident) AS countOfIncidents
+FROM murderstats1st
+WHERE victimage < 18
+GROUP BY year
+HAVING COUNT(incident) > 2000
+ORDER BY countOfIncidents DESC;
+
+#Demonstrates how to use the PARTITION call which allows you to group inside the select with what is specified after the BY
+SELECT DISTINCT
+	weapon,
+	victimcount,
+	AVG(victimcount) OVER (PARTITION BY weapon) AS avgStateVictimCount
+FROM murderstats1st;
+
+
+#Demonstrates filtering using a subquery - in this statement it will first run the select statement within the parentheses/ it gets run first and generates the table that the o
+#outer query runs on
+SELECT
+	weapon
+FROM murderstats1st
+WHERE state IN (
+		SELECT state
+		FROM murderstats1st
+		WHERE state = 'Hawaii')
