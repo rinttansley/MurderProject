@@ -3,3 +3,64 @@ This dataset was obtained from data.world - https://data.world/frank12/homicide-
 -------------------------
 Postgres Database Setup
 -------------------------
+
+# Create 2 tables with separated information to practice joins
+
+CREATE TABLE murderStats1st (
+	RecordID bigserial,
+	AgencyCode varchar(25),
+	AgencyName varchar(50),
+	AgencyType varchar(50),
+	City varchar(50),
+	State varchar(50),
+	Year date,
+	Month varchar(50),
+	Incident int,
+	CrimeType varchar(75),
+	CrimeSolved varchar(50),
+	VictimSex varchar(50),
+	VictimAge int,
+	VictimRace varchar(75),
+	VictimEthnicity varchar(50),
+	PerpetratorSex varchar(50),
+	PerpetratorAge int,
+	PerpetratorRace varchar(75),
+	PerpetratorEthnicity varchar(50),
+	Relationship varchar(50),
+	Weapon	varchar(75),
+	VictimCount int,
+	PerpetratorCount int,
+	RecordSource varchar(50)
+	);
+  
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+  CREATE TABLE murderStats2nd (
+	RecordID bigserial,
+	AgencyCode varchar(25),
+	AgencyName varchar(50),
+	AgencyType varchar(50),
+	City varchar(50),
+	State varchar(50),
+	Year date,
+	Month varchar(50),
+	Incident int,
+	CrimeType varchar(75),
+	CrimeSolved varchar(50),
+	VictimSex varchar(50),
+	VictimAge int,
+	VictimRace varchar(75),
+	VictimEthnicity varchar(50),
+	PerpetratorSex varchar(50),
+	PerpetratorAge int,
+	PerpetratorRace varchar(75),
+	PerpetratorEthnicity varchar(50),
+	Relationship varchar(50),
+	Weapon	varchar(75),
+	VictimCount int,
+	PerpetratorCount int,
+	RecordSource varchar(50)
+	);
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   
+   
