@@ -1,6 +1,7 @@
 # MurderProject - This project is still currently in progress
 ### General Important notes: creating a GitHub is also its own work in progress
-### While I do view myself as somewhat proficient in terms of navigating SQL, I fully believe there is still a wealth of opportunity for me to explore within SQL, particularly with Subqueries and answering interview style questions which will be an additional branch to this project repository. 
+### While I do view myself as somewhat proficient in terms of navigating SQL, I fully believe there is still a wealth of opportunity for me to explore within SQL, particularly with Subqueries and answering interview style questions which will be an additional branch to this project repository.
+### It is also important to note that while DBA is a topic I am passionate about and would love to explore more of, the roles I am currently pursuing are ones where I would hold more scope over retrieving data versus setting up the skeleton.
 
 
 ## Project Summary
@@ -24,7 +25,7 @@ Methods to be added in both SQL form and Tableau visualizations.
 ## References
 This data set was obtained from data.world - https://data.world/frank12/homicide-dataset-cleaned
 
-SQL Recipies - App
+SQL Recipes - App
 
 Practical SQL - A Beginner’s Guide to Storytelling with Data by Anthony DeBarros
 
