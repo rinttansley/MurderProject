@@ -1,4 +1,5 @@
 # MurderProject - This project is still currently in progress
+## It is also important to note that creating a GitHub is also its own work in progress
 
 
 ## Project Summary
