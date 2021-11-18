@@ -61,6 +61,21 @@ CREATE TABLE murderStats1st (
 	PerpetratorCount int,
 	RecordSource varchar(50)
 	);
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    
-   
+# Updating column types as needed after import didn't work as expected
+
+ALTER TABLE murderstats
+ALTER COLUMN year TYPE text;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ALTER TABLE murderstats
+ALTER COLUMN year TYPE int USING year::integer;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ALTER TABLE murderstats
+ALTER COLUMN agencytype TYPE varchar (200);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ALTER TABLE murderstats
+ALTER COLUMN agencyname TYPE varchar (200);
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
