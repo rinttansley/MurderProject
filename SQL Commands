@@ -860,10 +860,8 @@ ORDER BY perpetratorage;
 
 # Demonstrates deleting all rows from a database - this function can be limtied by admin access to not allow deletion without where
 DELETE FROM copyofms2
-
 SELECT *
 FROM copyofms2
-
 
 # Demonstrates casting data into a different type
 SELECT year,
@@ -888,3 +886,46 @@ DROP TABLE copyofms2
 
 # Demonstrates changing a table name
 ALTER TABLE testingcopy RENAME to copyOfTest
+
+#Demonstrates creating a view
+CREATE VIEW murderView AS
+SELECT
+	murderstats1st.victimage,
+	murder1980.victimage AS age1980,
+	murder1980.weapon
+FROM murderstats1st
+INNER JOIN murder1980 ON
+murderstats1st.recordid = murder1980.recordid AND
+murder1980.state = 'Hawaii';
+
+SELECT * FROM murderView
+LIMIT 10;
+
+# Demonstrates dropping a view
+DROP VIEW avgVictimAge
+
+# Demonstrates creating calculated fields in the view
+CREATE VIEW countVictimAge AS
+SELECT
+victimage,
+COUNT(victimage) AS countAgePerYear
+FROM murderstats1st
+GROUP BY victimage
+ORDER BY victimage DESC;
+
+SELECT *
+FROM countVictimAge;
+
+
+# Demonstrates filtering data in a view
+CREATE VIEW youngPerps AS
+SELECT
+perpetratorage,
+victimcount
+FROM murderstats1st
+WHERE perpetratorage < 10
+GROUP BY perpetratorage, victimcount
+ORDER BY perpetratorage DESC;
+
+SELECT *
+FROM youngPerps
