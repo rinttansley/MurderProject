@@ -576,3 +576,253 @@ WHERE state IN (
 		SELECT state
 		FROM murderstats1st
 		WHERE state = 'Hawaii')
+		
+#Demonstrates simple equijoins
+SELECT 
+	  murder1980.city,
+	  murderstats1st.city
+FROM murder1980, murderstats1st
+WHERE
+      murder1980.recordid = murderstats1st.recordid
+LIMIT 10;
+
+#Demonstrates using an inner join
+SELECT
+	murder1980.city,
+	murderstats1st.crimesolved
+FROM murder1980
+INNER JOIN murderstats1st ON
+	murder1980.recordid = murderstats1st.recordid
+LIMIT 15;
+
+
+#Demonstrates joining multiple tables
+SELECT
+	murder1980.city,
+	murderstats1st.crimesolved,
+	murderstats2nd.victimage
+FROM murder1980, murderstats1st, murderstats2nd
+WHERE
+	murder1980.city = murderstats1st.city AND
+	murder1980.city = murderstats2nd.city AND
+	murder1980.weapon = 'Shotgun' AND
+	murderstats2nd.victimsex = 'Male'
+LIMIT 15;
+
+
+#Demonstrates using aliases instead of names for tables
+SELECT
+	m80.city,
+	m1.crimesolved,
+	m2.victimage
+FROM murder1980 AS m80, murderstats1st AS m1, murderstats2nd AS m2
+WHERE
+	m80.city = m1.city AND
+	m80.city = m2.city AND
+	m80.weapon = 'Shotgun' AND
+	m2.victimsex = 'Male'
+LIMIT 10;
+
+
+#Demonstrates using the same table with different alias names
+SELECT
+	m80.month,
+	m802.victimrace
+FROM murder1980 AS m80, murder1980 AS m802
+WHERE m80.recordid = m802.recordid;
+
+#Demonstrates selecting all table columns with join
+SELECT 
+	m80.month,
+	m1.*
+FROM murder1980 AS m80, murderstats1st AS m1
+WHERE m80.recordid = m1.recordid
+LIMIT 10;
+
+#Demonstrates Left Joins- if there are no records in the right table that meet the join conditions then there will be nulls on the right side
+SELECT m80.month,
+	   m1.victimage,
+	   m1.weapon,
+	   m1.victimsex
+FROM murder1980 AS m80
+LEFT JOIN murderstats1st AS m1 ON
+		 m80.recordid = m1.recordid AND
+		 m1.victimsex = 'Male'
+
+
+#Demonstrates Right Joins - if there are no records on the left side that meet the join conditions then there will be nulls on the left side
+SELECT m80.month,
+	   m1.victimage,
+	   m1.weapon,
+	   m1.victimsex
+FROM murder1980 AS m80
+RIGHT JOIN murderstats1st AS m1 ON
+		 m80.recordid = m1.recordid AND
+		 m1.victimsex = 'Male'
+
+
+
+#Demonstrates a full outer join - selects all records from both tables, if there are no records in any table that meet the conditions of the join then its fields
+will contain nulls
+SELECT m80.month,
+	   m1.victimage,
+	   m1.weapon,
+	   m1.victimsex
+FROM murder1980 AS m80
+FULL JOIN murderstats1st AS m1 ON
+		 m80.recordid = m1.recordid AND
+		 m1.victimsex = 'Female'
+
+
+
+#Demonstrates joining with aggregate functions
+SELECT
+	m80.relationship,
+	COUNT(m1.city) AS cityCount
+FROM murder1980 AS m80
+INNER JOIN murderstats1st AS m1 ON
+		 m80.recordid = m1.recordid
+GROUP BY m80.relationship
+ORDER BY 2 DESC;
+
+
+#Demonstrates using the UNION function to join 2 sets of results - this will automatically remove duplicate rows
+SELECT perpetratorsex, perpetratorage, victimage
+FROM murderstats1st
+WHERE perpetratorage BETWEEN 75 AND 76
+
+UNION
+
+SELECT perpetratorsex, perpetratorage, victimage
+FROM murderstats1st
+WHERE perpetratorage BETWEEN 65 AND 66;
+
+
+#Demonstrates using the UNION ALL function - this works the same as union but keeps in all rows that may be duplicates
+SELECT perpetratorsex, perpetratorage, victimage
+FROM murderstats1st
+WHERE perpetratorage BETWEEN 75 AND 76
+
+UNION ALL
+
+SELECT perpetratorsex, perpetratorage, victimage
+FROM murderstats1st
+WHERE perpetratorage BETWEEN 65 AND 66;
+
+
+
+#Demonstrates using the order by with the union all - this sorts both sets of query results even though it is only on the bottom statement
+SELECT perpetratorsex, perpetratorage, victimage
+FROM murderstats1st
+WHERE perpetratorage BETWEEN 75 AND 76
+
+UNION ALL
+
+SELECT perpetratorsex, perpetratorage, victimage
+FROM murderstats1st
+WHERE perpetratorage BETWEEN 65 AND 66
+ORDER BY perpetratorage;
+
+
+#Demonstrates inserting a new complete row of information into an existing database
+INSERT INTO murderstats2nd
+VALUES (
+		1,
+		'CO00102',
+		'Colorado State Police',
+		'Municipal Police',
+		'Centennial',
+		'Colorado',
+		2021,
+		'November',
+		2,
+		'Murder or Manslaughter',
+		'Yes',
+		'Male',
+		14,
+		'Native American/Alaska Native',
+		'Not Hispanic',
+		'Male',
+		15,
+		'Unknown',
+		'Unknown',
+		'Acquaintance',
+		'Blunt Object',
+		0,
+		0,
+		'FBI'
+)
+
+#Demonstrates inserting a new incomplete row of data when the columns and values are explicitly stated
+#Inserting can be a partal process and it can be done out of order from how the table was originally created as long the values match the existing data types
+#for partial information, the table has to have been originally designed to allow NULL values OR
+#if a default value is specified which means if no value is provided, the database will know what to provide
+INSERT INTO murderstats2nd (
+	crimesolved,
+	victimrace,
+	weapon)
+VALUES (
+	'No',
+	'White',
+	'Rifle'
+)
+
+SELECT *
+FROM murderstats2nd
+ORDER BY recordid;
+
+
+#Demonstrates inserting retrieved data from one table into another
+#All of the rows specified  will be added to the murderstats2nd table - the DBMS does not pay attention to the column names, it will go based on column position?
+#If all of the fields of the table in the SELECT clause are the same as in the insert clause, you can just use SELECT *
+#If everything matches you can use INSERT INTO (table) SELECT * FROM (table)
+INSERT INTO murderstats2nd (
+			agencytype,
+			city,
+             	 	state)
+SELECT
+	agencytype,
+	city,
+    	state
+FROM murder1980;
+
+SELECT *
+FROM murderstats2nd
+ORDER BY recordid;
+
+# Demonstrates creating a copy of a table
+CREATE TABLE copyofms2 AS
+SELECT * FROM murderstats2nd;
+
+
+# Demonstrates updating a single column with a way to validate
+UPDATE copyofms2
+SET victimage = NULL
+WHERE victimage = 998;
+
+SELECT *
+FROM copyofms2
+WHERE victimage IS NULL AND crimesolved IS NOT NULL
+ORDER BY crimesolved DESC;
+
+
+# Demonstrates updating multiple columns with a way to validate
+UPDATE copyofms2
+SET city = 'Miami Dade',
+	agencycode = 'MD0980'
+WHERE city = 'Dade';
+
+SELECT *
+FROM copyofms2
+WHERE state = 'Florida'
+ORDER BY city;
+
+
+# Demonstrates deleting a column value with a way to validate
+UPDATE copyofms2
+SET perpetratorage = NULL
+WHERE perpetratorage = 0;
+
+SELECT *
+FROM copyofms2 
+WHERE perpetratorage IS NULL;
