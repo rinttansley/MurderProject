@@ -366,6 +366,7 @@ ORDER BY relationship;
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~Dates Table~~~~~~~~~~~
+This code comes directly from Practical SQL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 CREATE TABLE nyc_yellow_taxi_trips_2016_06_01 (
@@ -391,8 +392,6 @@ CREATE TABLE nyc_yellow_taxi_trips_2016_06_01 (
     total_amount numeric(9,2) NOT NULL
 );
 
-
-
 COPY nyc_yellow_taxi_trips_2016_06_01 (
     vendor_id,
 		,
@@ -416,8 +415,6 @@ COPY nyc_yellow_taxi_trips_2016_06_01 (
    )
 FROM 'C:\Users\Public\Documents\datesexamples.csv'
 WITH (FORMAT CSV, HEADER, DELIMITER ',');
-
-
 
 SELECT * FROM nyc_yellow_taxi_trips_2016_06_01
 LIMIT 5;
@@ -544,8 +541,6 @@ FROM murderstats1st
 GROUP BY city, year
 HAVING COUNT(incident) > 50;
 
-
-
 #Demonstrates using HAVING and WHERE in the same statement
 SELECT
 	year,
@@ -571,7 +566,6 @@ SELECT DISTINCT
 	victimcount,
 	AVG(victimcount) OVER (PARTITION BY weapon) AS avgStateVictimCount
 FROM murderstats1st;
-
 
 #Demonstrates filtering using a subquery - in this statement it will first run the select statement within the parentheses/ it gets run first and generates the table that the o
 #outer query runs on
