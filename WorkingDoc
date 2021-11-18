@@ -1,3 +1,5 @@
+General Notes
+
 Postgres Database Setup
 
 CREATE TABLE murderStats1st (
@@ -98,7 +100,6 @@ LIKE - pattern (case sensitive)
 ILIKE - pattern (not case sensitive)
 NOT
 
-**Probably want to create some statements utilizing at least the last 4/5 to show knowledge and ability to use
 
 ~~ Math Operators
 +
@@ -111,7 +112,7 @@ NOT
 ||/ - Cube Root
 | - Factorial
 
-~~ Good practice to avoid calling files .csv if the coma is not the separator/delimiter
+~~ Good practice to avoid calling files .csv if , is not the separator/delimiter
 
 --- // ---
 Use snake_case
