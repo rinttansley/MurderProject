@@ -4,7 +4,11 @@ This dataset was obtained from data.world - https://data.world/frank12/homicide-
 Postgres Database Setup
 -------------------------
 
-# Create 2 tables with separated information to practice joins
+# Demonstrates creating tables - 2 for utilizing join commands
+# You can specify NOT NULL in the table creation process - RecordSource varchar(50) NOT NULL
+# You can specify default values in the table creation process - RecordSource varchar(50) DEFAULT FBI
+# You can specify a primary key in the table creation process - RecordSource varchar(50) PRIMARY KEY (OR) PRIMARY KEY at the end after the type has been set before
+# OR CONSTRAINT PK_Documents PRIMARY KEY (RecordSource)
 
 CREATE TABLE murderStats1st (
 	RecordID bigserial,
@@ -61,6 +65,17 @@ CREATE TABLE murderStats1st (
 	PerpetratorCount int,
 	RecordSource varchar(50)
 	);
+		
+# You can specify a foreign key  - so here the primary key of this table would be RecordID and AgencyType would be the 
+# FK that references the PK of AgencyType in the other table
+
+CREATE TABLE murderStats2nd (
+	RecordID bigserial,
+	AgencyCode varchar(25),
+	AgencyName varchar(50),
+	AgencyType varchar(50) REFERENCES murderStats1st (AgencyType)
+	CONSTRAINT murder_key PRIMARY KEY (RecordID, AgencyType)
+);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    
 # Updating column types as needed after import didn't work as expected
@@ -826,3 +841,50 @@ WHERE perpetratorage = 0;
 SELECT *
 FROM copyofms2 
 WHERE perpetratorage IS NULL;
+
+#Demonstrates updating all rows with validation
+UPDATE copyofms2
+SET recordsource = 'ThoseToughDudes';
+
+SELECT year, recordsource
+FROM copyofms2
+LIMIT 10;
+
+# Demonstrates deleting specific rows with validation
+DELETE FROM copyofms2
+WHERE perpetratorage IS NULL;
+
+SELECT perpetratorage, weapon
+FROM copyofms2
+ORDER BY perpetratorage; 
+
+# Demonstrates deleting all rows from a database - this function can be limtied by admin access to not allow deletion without where
+DELETE FROM copyofms2
+
+SELECT *
+FROM copyofms2
+
+
+# Demonstrates casting data into a different type
+SELECT year,
+CAST(AVG(year) AS CHAR(15))
+FROM murderstats2nd
+GROUP BY year;
+
+# Demonstrates adding a column
+ALTER TABLE murder1980
+ADD lastUpdated date;
+
+SELECT victimage, victimsex, lastUpdated
+FROM murder1980
+LIMIT 5;
+
+# Demonstrates deleting a column
+ALTER TABLE copyofms2
+DROP COLUMN recordsource;
+
+# Demonstrates dropping a whole table
+DROP TABLE copyofms2
+
+# Demonstrates changing a table name
+ALTER TABLE testingcopy RENAME to copyOfTest
