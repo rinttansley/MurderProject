@@ -19,7 +19,7 @@ PostgreSQL - PGAdmin4
 ## Analysis Methods
 Methods to be added in both SQL form and Tableau visualizations.
 
-<img src="https://user-images.githubusercontent.com/50388830/141377387-a0cc76e7-4a0e-48c9-b4b5-b325c477cfb3.png" width="100" height="100">
+<img src="https://user-images.githubusercontent.com/50388830/141377387-a0cc76e7-4a0e-48c9-b4b5-b325c477cfb3.png" width="500" height="500">
 
 ![alt text](https://user-images.githubusercontent.com/50388830/141377387-a0cc76e7-4a0e-48c9-b4b5-b325c477cfb3.png)
 ![alt text](https://user-images.githubusercontent.com/50388830/142501608-a7a80162-7b00-4a0f-938c-afc8f3e05920.png)
