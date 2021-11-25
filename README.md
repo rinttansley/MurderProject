@@ -28,7 +28,7 @@ Methods to be added in both SQL form and Tableau visualizations.
 <img src="https://user-images.githubusercontent.com/50388830/142501608-a7a80162-7b00-4a0f-938c-afc8f3e05920.png" width="500">
 <img src="https://user-images.githubusercontent.com/50388830/142738723-4181834d-738b-40e1-8052-d6b0e049feb7.png" width="500">
 </p>
-<img src="https://user-images.githubusercontent.com/50388830/142740564-53fef4a1-f29b-4208-a75b-eb5d743c22c1.png" width="500">
+<img src="https://user-images.githubusercontent.com/50388830/143505147-f9ff16c0-a8b8-4f24-8464-ffa70c129ff4.png" width="500">
 
 
 
